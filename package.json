@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "@babel/eslint-parser": "^7.19.1",
         "cypress": "^10.10.0"
     },
     "name": "cypress-testing",

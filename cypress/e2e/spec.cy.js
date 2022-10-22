@@ -13,14 +13,15 @@ describe('spec', () => {
 
     it('nav bar should always on top screen', () => {
         cy.visit('https://cms-lyart.vercel.app');
+        cy.scrollTo('bottom');
         cy.get('#menu a').should('be.visible').and('have.attr', 'href');
     })
 
     it('can go to events page', () => {
         cy.visit('https://cms-lyart.vercel.app');
         cy.get('#menu a:first').click();
-        cy.url('https://cms-lyart.vercel.app/events');
-        expect('https://cms-lyart.vercel.app/events').to.include('events');
+        cy.url('https://cms-lyart.vercel.app/events').should('include', 'events');
+
     })
 
     it('logic can click and then go back index page', () => {
@@ -28,8 +29,8 @@ describe('spec', () => {
         cy.get('#menu a:first').click();
         cy.url('https://cms-lyart.vercel.app/events');
         cy.get('#logo').click();
-        cy.url('https://cms-lyart.vercel.app');
-        expect('https://cms-lyart.vercel.app').to.have.string('https://cms-lyart.vercel.app');
+        cy.url('https://cms-lyart.vercel.app').should('include', 'cms-lyart');
+
     })
 
     it('newsletter can type my email address and click subscribe', () => {
