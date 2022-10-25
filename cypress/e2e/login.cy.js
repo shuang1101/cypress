@@ -8,47 +8,47 @@ describe('login', () => {
         cy.visit('https://cms-lyart.vercel.app/login');
     });
     //case
-    // it('Case1: student、teacher、manager this form can normal show ', () => {
+    it('Case1: student、teacher、manager this form can normal show ', () => {
 
-    //     cy.get('.ant-radio-button-wrapper').contains('Student').click();
-    //     cy.get('input[value="student"]').should('be.checked');
-    //     //student是默认选中的
-    //     cy.get('.ant-radio-button-wrapper').contains('Teacher').click();
-    //     //teacher可点击
-    //     cy.get('.ant-radio-button-wrapper').contains('Manager').click();
-    //     //manager可点击
+        cy.get('.ant-radio-button-wrapper').contains('Student').click();
+        cy.get('input[value="student"]').should('be.checked');
+        //student是默认选中的
+        cy.get('.ant-radio-button-wrapper').contains('Teacher').click();
+        //teacher可点击
+        cy.get('.ant-radio-button-wrapper').contains('Manager').click();
+        //manager可点击
 
-    // })
-
-
-    // it('Case2: student login pass', () => {
-
-    //     cy.get('.ant-radio-button-wrapper').contains('Student').click();
-    //     cy.get('input[type="email"]').type('student@admin.com');
-    //     cy.get('input[type="password"]').type('111111');
-    //     cy.contains('button', 'Sign in').click().then(() => {
-    //         cy.url().should('eq', 'https://cms-lyart.vercel.app/login');
-    //     })
-    // });
+    })
 
 
-    // it('Case 3: teacher login pass', () => {
-    //     cy.get('.ant-radio-button-wrapper').contains('Teacher').click();
-    //     cy.get('input[type="email"]').type('teacher@admin.com');
-    //     cy.get('input[type="password"]').type('111111');
-    //     cy.contains('button', 'Sign in').click().then(() => {
-    //         cy.url().should('eq', 'https://cms-lyart.vercel.app/login');
-    //     })
-    // });
+    it('Case2: student login pass', () => {
 
-    // it('Case 4: manager login pass', () => {
-    //     cy.get('.ant-radio-button-wrapper').contains('Manager').click();
-    //     cy.get('input[type="email"]').type('manager@admin.com');
-    //     cy.get('input[type="password"]').type('111111');
-    //     cy.contains('Sign in').click().then(() => {
-    //         cy.url().should('eq', 'https://cms-lyart.vercel.app/login');
-    //     })
-    // });
+        cy.get('.ant-radio-button-wrapper').contains('Student').click();
+        cy.get('input[type="email"]').type('student@admin.com');
+        cy.get('input[type="password"]').type('111111');
+        cy.contains('button', 'Sign in').click().then(() => {
+            cy.url().should('eq', 'https://cms-lyart.vercel.app/login');
+        })
+    });
+
+
+    it('Case 3: teacher login pass', () => {
+        cy.get('.ant-radio-button-wrapper').contains('Teacher').click();
+        cy.get('input[type="email"]').type('teacher@admin.com');
+        cy.get('input[type="password"]').type('111111');
+        cy.contains('button', 'Sign in').click().then(() => {
+            cy.url().should('eq', 'https://cms-lyart.vercel.app/login');
+        })
+    });
+
+    it('Case 4: manager login pass', () => {
+        cy.get('.ant-radio-button-wrapper').contains('Manager').click();
+        cy.get('input[type="email"]').type('manager@admin.com');
+        cy.get('input[type="password"]').type('111111');
+        cy.contains('Sign in').click().then(() => {
+            cy.url().should('eq', 'https://cms-lyart.vercel.app/login');
+        })
+    });
 
     it('Case5:The email format is correct, otherwise an error message will prompt ', () => {
         //获取焦点
