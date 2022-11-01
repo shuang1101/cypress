@@ -9,6 +9,7 @@ describe('login', () => {
     beforeEach(() => {
         cy.visit('/login');
 
+
     });
     // case
     it('Case1: student、teacher、manager this form can normal show ', () => {
@@ -23,7 +24,7 @@ describe('login', () => {
     })
 
 
-    it('Case 2:The email format is correct, otherwise an error message will prompt ', () => {
+    it('Case 2:The email format is correct, otherwise an error message will prompt ', function() {
         //测试邮箱
         cy.get('input[type="email"]').should('have.attr', 'placeholder', 'Please input email');
         //测试不写邮箱
@@ -37,7 +38,7 @@ describe('login', () => {
 
     });
 
-    it('Case3:The password format is correct, otherwise an error message will prompt ', () => {
+    it('Case3:The password format is correct, otherwise an error message will prompt ', function() {
 
         //测试密码
         cy.get('input[type="password"]').should('have.attr', 'placeholder', 'Please input password');
@@ -53,89 +54,39 @@ describe('login', () => {
     });
 
 
-    it('Case 4: student login pass', () => {
+    it('Case 4: student login pass', function() {
 
-        cy.get('.ant-radio-button-wrapper').contains('Student').click();
-        cy.get('input[type="email"]').type('student@admin.com');
-        cy.get('input[type="password"]').type('111111');
-        cy.contains('button', 'Sign in').click().then(() => {
-            cy.url().should('eq', 'https://cms-lyart.vercel.app/dashboard/student');
-            //  cy.url().should('eq', Cypress.config().baseUrl + '/dashboard');
-        })
+        cy.loginFunction('student@admin.com', '111111', 'Student');
+        cy.url().should('eq', 'https://cms-lyart.vercel.app/dashboard/student');
+        //  cy.url().should('eq', Cypress.config().baseUrl + '/dashboard');
     });
 
 
-    it('Case 5: teacher login pass', () => {
-        cy.get('.ant-radio-button-wrapper').contains('Teacher').click();
-        cy.get('input[type="email"]').type('teacher@admin.com');
-        cy.get('input[type="password"]').type('111111');
-        cy.contains('button', 'Sign in').click().then(() => {
-            cy.url().should('eq', 'https://cms-lyart.vercel.app/dashboard/teacher');
-        })
+
+    it('Case 5: teacher login pass', function() {
+        cy.loginFunction('teacher@admin.com', '111111', 'Teacher');
+        cy.url().should('eq', 'https://cms-lyart.vercel.app/dashboard/teacher');
     });
 
-    it('Case 6: manager login pass', () => {
-        cy.get('.ant-radio-button-wrapper').contains('Manager').click();
-        cy.get('input[type="email"]').type('manager@admin.com');
-        cy.get('input[type="password"]').type('111111');
-        cy.contains('button', 'Sign in').click().then(() => {
-            cy.url().should('eq', 'https://cms-lyart.vercel.app/dashboard/manager');
 
-        })
-    });
-    it('Case 7: Add course', () => {
-        cy.get('.ant-radio-button-wrapper').contains('Manager').click();
-        cy.get('input[type="email"]').type('manager@admin.com');
-        cy.get('input[type="password"]').type('111111');
-        cy.contains('button', 'Sign in').click().then(() => {
-            cy.url().should('eq', 'https://cms-lyart.vercel.app/dashboard/manager');
-
-
-            cy.get('li[role="menuitem"').eq(3).click();
-            cy.get('li[title="Add Course"] > span > a').click().should('be.visible').and('have.attr', 'href');
-            //.should('be.visible').and('have.attr', 'href');
-
-            cy.get('label[title="Course Name"]').type('abcef');
-            cy.get('#teacherId').type('una');
-            cy.intercept('GET', '/api/teachers?query=una').as('teachersRes');
-            cy.intercept('GET', '/api/courses/type').as('types');
-
-            cy.get('.ant-select-item-option-content').first().click();
-            cy.get('#type').click();
-            cy.get('.ant-select-item-option').contains('Python').click();
-            cy.get('.ant-select-item-option').contains('PHP').click();
-
-            // cy.get('#startTime').click()
-            //     .then(() => {
-            //         var title = new Date();
-            //         title = title.getDate() + 2;
-            //         title = title.getFullYear() + "-" + title.getMonth() + "-" + title.getDay();
-            //         cy.get(`td[title=${title}]`).click();
-
-            //     });一直显示没有这个function:getFullYear
-
-            cy.get('#price').type(750);
-            cy.get('#maxStudents').type(2);
-
-            cy.get('.ant-input-group > .ant-input-number > .ant-input-number-input-wrap > input.ant-input-number-input')
-                .type(4);
-
-            cy.get('.ant-input-group > .ant-select > .ant-select-selector').click()
-                .then(() => {
-                    cy.get('.ant-select-item-option-content').contains('day').click();
-                })
-
-            cy.get('#detail').type(
-                'Cypress is a next generation front end testing tool built for the modern web. We address the key pain points developers and QA engineers face when testing modern applications.'
-            );
-
-
-
-
-        })
-
-
+    it('Case 6: manager login pass', function() {
+        cy.loginFunction('manager@admin.com', '111111', 'Manager');
+        cy.url().should('eq', 'https://cms-lyart.vercel.app/dashboard/manager');
     })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
